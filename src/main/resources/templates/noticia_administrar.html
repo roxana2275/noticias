@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Noticias Egg</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../img/favicon-16x16.png">
+        <link rel="stylesheet" href="../../css/index.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="../../img/Egg.png" alt="Egg" >
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/noticia/administrar}">Administrar</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </nav>
+
+        <header class="header">
+            <section class="titulo-principal text-center" >
+                <h3>ADMINISTRAR NOTICIAS EGG</h3>
+                <div class="container m-5 row">
+                    <table class="table col-6" >
+                        <thead>
+                            <tr>
+                                <th scope="col">Nro</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Noticia</th>
+                                <th scope="col">Modificar</th>
+                                <th scope="col">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider" th:each="noticia : ${noticias}">
+                            <tr>
+                                <td th:text="${noticia.id}"></td>
+                                <td th:text="${noticia.titulo}"></td>
+                                <td th:text="${noticia.cuerpo}"></td>
+                                <td>
+                                     <form >
+                                         
+                                        <a th:href="@{/noticia/modificar/{id}(id=${noticia.id})}" class="btn btn-warning">Modificar</a>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form th:action="@{/noticia/borrar/{id}(id=${noticia.id})}">
+                                        <button type="submit" class="btn btn-warning">Borrar</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                        <div class="card-body">
+                            <h5 class="card-title">Exito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                        <div class="card-body">
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <a type="button" class="btn btn-warning" th:href="@{/noticia/cargar/}" >Agregar</a>
+            </section>
+        </header>
+        <footer class="d-flex justify-content-evenly align-items-center p-3">
+            <h5 class="text-danger-emphasis">Estamos cambiando el mundo de muchas personas</h5>
+            <h6 class="text-danger-emphasis fst-italic">2023. Todos los derechos reservados. Sujeto a términos y condiciones.</h6>
+        </footer>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </body>
+</html>
