@@ -18,6 +18,7 @@ public class Noticia implements Serializable {
     
     private String titulo;
     private String cuerpo;
+    private Periodista periodista;
 
     public Noticia() {
     }
@@ -44,6 +45,14 @@ public class Noticia implements Serializable {
 
     public void setCuerpo(String cuerpo) {
         this.cuerpo = cuerpo;
+    }
+
+    public Periodista getPeriodista() {
+        return periodista;
+    }
+
+    public void setPeriodista(Periodista periodista) {
+        this.periodista = periodista;
     }
     
     
